@@ -1,0 +1,43 @@
+.card {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 1px 2px 0 1px rgba(0, 0, 0, 0.15);
+  &:hover {
+    box-shadow: 1px 2px 0 1px #ccc;
+  }
+
+  .card-top {
+    display: flex;
+
+    .card-labels {
+      flex: 1;
+      display: flex;
+      gap: 10px;
+    }
+  }
+
+  .card-title {
+    font-weight: bold;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+}
