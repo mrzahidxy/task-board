@@ -3,20 +3,18 @@ import Card from '../Card/Card';
 import Editable from '../Editable/Editable';
 import './board.scss';
 
-const Board = ( props ) => {
 
+const Board = (props) => {
 
     return (
         <div className='board'>
             <div className="board-top">
                 <p className="board-top-title">
-                    {props.board.title} 
-                    <span style={{marginLeft: '5px'}}>{props.board?.cards?.length || 0}</span>
+                    <span>{props.board.title} :</span>
+                    <span >{props.board?.cards?.length || 0}</span>
                 </p>
                 <div className="board-top-more">
-                    <div>
-                        <Trash onClick={() => props.removeBoard()} />
-                    </div>
+                    <Trash onClick={() => props.removeBoard()} />
                 </div>
             </div>
 
@@ -31,8 +29,10 @@ const Board = ( props ) => {
                 }
                 <Editable
                     buttonText='Add New Card'
+                    text= 'Add New Card'
                     displayClass='board-cards-add'
                     placeholder='Enter Card Title'
+                    placeholder1='Enter Card Description'
                     onSubmit={(value) => props.addCard(props.board?.id, value)}
                 />
             </div>

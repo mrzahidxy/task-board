@@ -12,12 +12,15 @@
     flex-direction: column;
     gap: 10px;
 
-    input {
+    input, textarea {
       border-radius: 3px;
       outline: none;
       border: 1px solid #1379ed;
       padding: 10px;
       font-size: 1rem;
+    }
+    .app-boards-board-add{
+      display: none;
     }
   }
   .editable-edit-footer {

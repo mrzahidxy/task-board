@@ -5,29 +5,52 @@ import './editable.scss'
 const Editable = (props) => {
 
   const [showEdit, setShowEdit] = useState(false);
-  const [inputText, setInputText] = useState(props.defaultValue || "");
+  const [data, setData] = useState({});
+
+  const handleData = (e) => {
+    const id = e.target.id;
+    const value = e.target.value;
+    setData({ ...data, [id]: value })
+  }
 
   const submission = (e) => {
     e.preventDefault();
-    if (inputText && props.onSubmit) {
-      setInputText("");
-      props.onSubmit(inputText);
+    if (props.onSubmit) {
+      props.onSubmit(data);
     }
     setShowEdit(false);
   };
+
+
+
   return (
     <div className='editable'>
       {
         showEdit ?
           (<form className={`editable-edit ${props.editClass || ''}`}
-          onSubmit={submission}>
+            onSubmit={submission}>
 
             <input
+              id='title'
               type="text"
-              value={inputText}
               placeholder={props.placeholder || props.text}
-              onChange={(event) => setInputText(event.target.value)}
+              onChange={handleData}
               autoFocus
+            />
+
+            <textarea
+              id='desc'
+              className={`editable-edit custom-scroll ${props.displayClass}`}
+              type="text"
+              placeholder={props.placeholder1}
+              onChange={handleData}
+            />
+
+            <input
+              id='time'
+              className={` ${props.displayClass}`}
+              type="datetime-local"
+              onChange={handleData}
             />
 
 
@@ -39,6 +62,7 @@ const Editable = (props) => {
             </div>
 
           </form>) :
+
           (
             <p className={`editable-display ${props.displayClass || ''}`} onClick={() => setShowEdit(true)}>{props.text || 'Add Item'}</p>
           )

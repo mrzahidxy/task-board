@@ -6,14 +6,18 @@ import Editable from './components/Editable/Editable';
 function App() {
 
   const [boards, setBoards] = useState(
-    JSON.parse(localStorage.getItem("prac-kanban")) || []
+    JSON.parse(localStorage.getItem("local-boards")) || [{
+      id: Date.now() + Math.random() * 2,
+      title: 'On-going',
+      cards: []
+    },]
   );
 
-  const addboardHandler = (name) => {
+  const addboardHandler = (value) => {
     const tempBoards = [...boards];
     tempBoards.push({
       id: Date.now() + Math.random() * 2,
-      title: name,
+      title: value.title,
       cards: [],
     });
     setBoards(tempBoards);
@@ -28,16 +32,17 @@ function App() {
     setBoards(tempBoards);
   };
 
-  const addCardHandler = (id, title) => {
+  const addCardHandler = (id, value) => {
     const index = boards.findIndex((item) => item.id === id);
     if (index < 0) return;
 
     const tempBoards = [...boards];
     tempBoards[index].cards.push({
       id: Date.now() + Math.random() * 2,
-      title,
+      title: value.title,
+      desc: value.desc,
       labels: [],
-      date: "",
+      date: value.time,
       tasks: [],
     });
     setBoards(tempBoards);
@@ -58,14 +63,14 @@ function App() {
   };
 
   useEffect(() => {
-    localStorage.setItem("prac-kanban", JSON.stringify(boards));
+    localStorage.setItem("local-boards", JSON.stringify(boards));
   }, [boards]);
 
 
   return (
     <div className="app">
       <h1 className="app-navbar">
-        Navbar
+        Kanban Task Board
       </h1>
       <div className="app-outer">
         <div className="app-boards">
@@ -82,7 +87,7 @@ function App() {
           <div className="app-boards-board">
             <Editable
               displayClass='app-boards-board-add'
-              text='Add Board'
+              text='Add New Board'
               placeholder='Enter Board Title'
               buttonText='Add New Board'
               onSubmit={addboardHandler} />

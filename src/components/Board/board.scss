@@ -13,13 +13,15 @@
       display: flex;
       align-items: center;
       font-weight: bold;
-
-      span {
-        color: gray;
-      }
+      color: dodgerblue;
+      gap: 5px;
     }
-    .board-top-more{
+
+    .board-top-more {
       position: relative;
+    }
+    &:hover {
+      color: red;
     }
   }
 
